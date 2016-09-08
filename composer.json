@@ -1,0 +1,13 @@
+{
+  "name": "vnn/wordpress-rest-api-client",
+  "autoload": {
+    "psr-4": {
+      "Vnn\\WpApiClient\\": "src/"
+    }
+  },
+  "require-dev": {
+    "peridot-php/peridot": "^1.18",
+    "peridot-php/leo": "^1.5",
+    "squizlabs/php_codesniffer": "^2.7"
+  }
+}

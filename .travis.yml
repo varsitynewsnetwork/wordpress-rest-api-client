@@ -1,0 +1,12 @@
+language: php
+
+php:
+  - 7
+
+before_script:
+  - composer install --prefer-dist --dev
+
+script:
+  - vendor/bin/peridot
+  - vendor/bin/phpcs --standard=PSR2 src
+
