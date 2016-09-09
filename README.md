@@ -18,10 +18,16 @@ composer require vnn/wordpress-rest-api-client
 Example:
 
 ```php
-$client = new WpClient($url);
-$client->setCredentials(new WpBasicCredentials('username', 'password'));
+use Vnn\WpApiClient\Auth\WpBasicAuth;
+use Vnn\WpApiClient\Http\GuzzleAdapter;
+use Vnn\WpApiClient\WpClient;
 
-$user = $client->users()->get(15);
+require 'vendor/autoload.php';
 
-echo $user['username'];
+$client = new WpClient(new GuzzleAdapter(new GuzzleHttp\Client()), 'http://yourwordpress.com');
+$client->setCredentials(new WpBasicAuth('user', 'securepassword'));
+
+$user = $client->users()->get(2);
+
+print_r($user);
 ```
