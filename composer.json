@@ -5,9 +5,18 @@
       "Vnn\\WpApiClient\\": "src/"
     }
   },
+  "require": {
+    "php": ">= 7.0, <= 8.0",
+    "psr/http-message": "^1.0"
+  },
   "require-dev": {
     "peridot-php/peridot": "^1.18",
     "peridot-php/leo": "^1.5",
-    "squizlabs/php_codesniffer": "^2.7"
+    "squizlabs/php_codesniffer": "^2.7",
+    "guzzlehttp/guzzle": "^6.2",
+    "peridot-php/peridot-prophecy-plugin": "^1.1"
+  },
+  "suggest": {
+    "guzzlehttp/guzzle": "^6.2"
   }
 }
