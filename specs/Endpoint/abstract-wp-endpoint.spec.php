@@ -14,11 +14,7 @@ describe(AbstractWpEndpoint::class, function () {
 
             $client->send($request)->willReturn($response)->shouldBeCalled();
 
-            $endpoint = new class($client->reveal()) extends AbstractWpEndpoint {
-                public function getEndpoint() {
-                    return '/foo';
-                }
-            };
+            $endpoint = new FakeEndpoint($client->reveal());
 
             $data = $endpoint->get(55);
             expect($data)->to->equal(['foo' => 'bar']);
@@ -31,11 +27,7 @@ describe(AbstractWpEndpoint::class, function () {
             $response = new \GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], '{"foo": "bar"}');
             $client->send(\Prophecy\Argument::type(Request::class))->willReturn($response)->shouldBeCalled();
 
-            $endpoint = new class($client->reveal()) extends AbstractWpEndpoint {
-                public function getEndpoint() {
-                    return '/foo';
-                }
-            };
+            $endpoint = new FakeEndpoint($client->reveal());
 
             $data = $endpoint->save(['foo' => 'bar']);
             expect($data)->to->equal(['foo' => 'bar']);
@@ -46,3 +38,9 @@ describe(AbstractWpEndpoint::class, function () {
         $this->getProphet()->checkPredictions();
     });
 });
+
+class FakeEndpoint extends AbstractWpEndpoint {
+    public function getEndpoint() {
+        return '/foo';
+    }
+}
