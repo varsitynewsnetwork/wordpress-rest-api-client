@@ -19,6 +19,21 @@ describe(AbstractWpEndpoint::class, function () {
             $data = $endpoint->get(55);
             expect($data)->to->equal(['foo' => 'bar']);
         });
+
+        it('should make a GET request without any ID', function () {
+            $client = $this->getProphet()->prophesize(WpClient::class);
+
+            $request = new Request('GET', '/foo');
+            $response = new \GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], '{"foo": "bar"}');
+
+            $client->send($request)->willReturn($response)->shouldBeCalled();
+
+            $endpoint = new FakeEndpoint($client->reveal());
+
+            $data = $endpoint->get();
+            expect($data)->to->equal(['foo' => 'bar']);
+        });
+
     });
 
     describe('save()', function () {

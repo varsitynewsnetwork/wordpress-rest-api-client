@@ -32,9 +32,9 @@ abstract class AbstractWpEndpoint
      * @param int $id
      * @return array
      */
-    public function get($id)
+    public function get($id = null)
     {
-        $request = new Request('GET', $this->getEndpoint()   . '/' . $id);
+        $request = new Request('GET', $this->getEndpoint()   . (is_null($id)?'': '/' . $id));
         $response = $this->client->send($request);
 
         if ($response->hasHeader('Content-Type')
