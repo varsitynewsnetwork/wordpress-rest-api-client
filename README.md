@@ -9,8 +9,20 @@ some other PHP project, for some reason.
 
 ## Installation
 
+This library can be installed with [Composer](https://getcomposer.org):
+
 ```text
 composer require vnn/wordpress-rest-api-client
+```
+
+The library will require an Http library to run. [Guzzle](http://guzzlephp.org) is 
+supported by the library, but you can use any Http library of your choise, so long
+as your write an adapter for that library.
+
+To install Guzzle:
+
+```text
+composer require guzzlehttp/guzzle
 ```
 
 ## Usage
