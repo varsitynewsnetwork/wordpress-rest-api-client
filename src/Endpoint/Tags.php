@@ -13,6 +13,6 @@ class Tags extends AbstractWpEndpoint
      */
     protected function getEndpoint()
     {
-        return '/tags';
+        return '/wp-json/wp/v2/tags';
     }
 }

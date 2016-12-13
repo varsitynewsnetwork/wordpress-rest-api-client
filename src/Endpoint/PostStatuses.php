@@ -13,6 +13,6 @@ class PostStatuses extends AbstractWpEndpoint
      */
     protected function getEndpoint()
     {
-        return '/statuses';
+        return '/wp-json/wp/v2/statuses';
     }
 }

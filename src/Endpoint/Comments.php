@@ -13,6 +13,6 @@ class Comments extends AbstractWpEndpoint
      */
     protected function getEndpoint()
     {
-        return '/comments';
+        return '/wp-json/wp/v2/comments';
     }
 }
