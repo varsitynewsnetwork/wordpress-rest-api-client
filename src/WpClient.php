@@ -92,7 +92,7 @@ class WpClient
         }
 
         $request = $request->withUri(
-            $this->httpClient->makeUri($this->wordpressUrl . '/wp-json/wp/v2' . $request->getUri())
+            $this->httpClient->makeUri($this->wordpressUrl . $request->getUri())
         );
 
         return $this->httpClient->send($request);
