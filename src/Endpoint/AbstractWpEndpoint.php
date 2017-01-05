@@ -30,11 +30,17 @@ abstract class AbstractWpEndpoint
 
     /**
      * @param int $id
+     * @param array $params - parameters that can be passed to GET
+     *        e.g. for tags: https://developer.wordpress.org/rest-api/reference/tags/#arguments
      * @return array
      */
-    public function get($id = null)
+    public function get($id = null, array $params = null)
     {
-        $request = new Request('GET', $this->getEndpoint()   . (is_null($id)?'': '/' . $id));
+        $uri = $this->getEndpoint();
+        $uri .= (is_null($id)?'': '/' . $id);
+        $uri .= (is_null($params)?'': '?' . http_build_query($params));
+
+        $request = new Request('GET', $uri);
         $response = $this->client->send($request);
 
         if ($response->hasHeader('Content-Type')
