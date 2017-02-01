@@ -18,6 +18,7 @@ use Vnn\WpApiClient\Http\ClientInterface;
  * @method Endpoint\Posts posts()
  * @method Endpoint\PostStatuses postStatuses()
  * @method Endpoint\PostTypes postTypes()
+ * @method Endpoint\SchoolUsers schoolUsers()
  * @method Endpoint\Tags tags()
  * @method Endpoint\Users users()
  */
@@ -48,9 +49,17 @@ class WpClient
      * @param ClientInterface $httpClient
      * @param string $wordpressUrl
      */
-    public function __construct(ClientInterface $httpClient, $wordpressUrl)
+    public function __construct(ClientInterface $httpClient, $wordpressUrl = '')
     {
         $this->httpClient = $httpClient;
+        $this->wordpressUrl = $wordpressUrl;
+    }
+
+    /**
+     * @param $wordpressUrl
+     */
+    public function setWordpressUrl($wordpressUrl)
+    {
         $this->wordpressUrl = $wordpressUrl;
     }
 
