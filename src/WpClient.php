@@ -4,6 +4,7 @@ namespace Vnn\WpApiClient;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 use Vnn\WpApiClient\Auth\AuthInterface;
 use Vnn\WpApiClient\Endpoint;
 use Vnn\WpApiClient\Http\ClientInterface;
