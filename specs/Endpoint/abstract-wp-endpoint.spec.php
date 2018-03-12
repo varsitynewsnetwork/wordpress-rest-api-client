@@ -50,6 +50,51 @@ describe(AbstractWpEndpoint::class, function () {
 
     });
 
+    describe('getResponse()', function () {
+        it('should make a GET request to the endpoint URL', function () {
+            $client = $this->getProphet()->prophesize(WpClient::class);
+
+            $request = new Request('GET', '/foo/55');
+            $response = new \GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], '{"foo": "bar"}');
+
+            $client->send($request)->willReturn($response)->shouldBeCalled();
+
+            $endpoint = new FakeEndpoint($client->reveal());
+
+            $data = $endpoint->getResponse(55);
+            expect($data)->to->equal($response);
+        });
+
+        it('should make a GET request without any ID', function () {
+            $client = $this->getProphet()->prophesize(WpClient::class);
+
+            $request = new Request('GET', '/foo');
+            $response = new \GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], '{"foo": "bar"}');
+
+            $client->send($request)->willReturn($response)->shouldBeCalled();
+
+            $endpoint = new FakeEndpoint($client->reveal());
+
+            $data = $endpoint->getResponse();
+            expect($data)->to->equal($response);
+        });
+
+        it('should make a GET request with parameters', function () {
+            $client = $this->getProphet()->prophesize(WpClient::class);
+
+            $request = new Request('GET', '/foo?bar=baz');
+            $response = new \GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], '{"foo": "bar"}');
+
+            $client->send($request)->willReturn($response)->shouldBeCalled();
+
+            $endpoint = new FakeEndpoint($client->reveal());
+
+            $data = $endpoint->getResponse(null, ['bar'=>'baz']);
+            expect($data)->to->equal($response);
+        });
+
+    });
+
     describe('save()', function () {
         it('should make a POST request to the endpoint URL', function () {
             $client = $this->getProphet()->prophesize(WpClient::class);
