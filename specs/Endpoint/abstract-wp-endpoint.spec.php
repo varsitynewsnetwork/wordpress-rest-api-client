@@ -17,7 +17,7 @@ describe(AbstractWpEndpoint::class, function () {
             $endpoint = new FakeEndpoint($client->reveal());
 
             $data = $endpoint->get(55);
-            expect($data)->to->equal(['foo' => 'bar']);
+            expect($data['foo'])->to->equal('bar');
         });
 
         it('should make a GET request without any ID', function () {
@@ -31,7 +31,7 @@ describe(AbstractWpEndpoint::class, function () {
             $endpoint = new FakeEndpoint($client->reveal());
 
             $data = $endpoint->get();
-            expect($data)->to->equal(['foo' => 'bar']);
+            expect($data['foo'])->to->equal('bar');
         });
 
         it('should make a GET request with parameters', function () {
@@ -45,9 +45,46 @@ describe(AbstractWpEndpoint::class, function () {
             $endpoint = new FakeEndpoint($client->reveal());
 
             $data = $endpoint->get(null, ['bar'=>'baz']);
-            expect($data)->to->equal(['foo' => 'bar']);
+            expect($data['foo'])->to->equal('bar');
         });
 
+        it('should expose WP-Total headers', function () {
+            $client = $this->getProphet()->prophesize(WpClient::class);
+
+            $request = new Request('GET', '/foo/55');
+
+            $headers = [
+                'Content-Type' => 'application/json',
+                'X-WP-Total' => 1,
+                'X-WP-TotalPages' => 2,
+            ];
+
+            $response = new \GuzzleHttp\Psr7\Response(200, $headers, '{"foo": "bar"}');
+
+            $client->send($request)->willReturn($response)->shouldBeCalled();
+
+            $endpoint = new FakeEndpoint($client->reveal());
+
+            $data = $endpoint->get(55);
+
+            expect($data->total)->to->equal(1);
+            expect($data->totalPages)->to->equal(2);
+        });
+
+        it('should include original request', function () {
+            $client = $this->getProphet()->prophesize(WpClient::class);
+
+            $request = new Request('GET', '/foo/55');
+            $response = new \GuzzleHttp\Psr7\Response(200, [], '{"foo": "bar"}');
+
+            $client->send($request)->willReturn($response)->shouldBeCalled();
+
+            $endpoint = new FakeEndpoint($client->reveal());
+
+            $data = $endpoint->get(55);
+
+            expect($data->request->getUri()->getPath())->to->equal('/foo/55');
+        });
     });
 
     describe('save()', function () {
@@ -59,7 +96,7 @@ describe(AbstractWpEndpoint::class, function () {
             $endpoint = new FakeEndpoint($client->reveal());
 
             $data = $endpoint->save(['foo' => 'bar']);
-            expect($data)->to->equal(['foo' => 'bar']);
+            expect($data['foo'])->to->equal('bar');
         });
     });
 

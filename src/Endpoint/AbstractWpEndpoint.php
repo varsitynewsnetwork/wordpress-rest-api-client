@@ -42,10 +42,10 @@ abstract class AbstractWpEndpoint
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
+        $results = new ResultSet($request, $response);
 
-        if ($response->hasHeader('Content-Type')
-            && substr($response->getHeader('Content-Type')[0], 0, 16) === 'application/json') {
-            return json_decode($response->getBody()->getContents(), true);
+        if (count($results)) {
+            return $results;
         }
 
         throw new RuntimeException('Unexpected response');
@@ -66,10 +66,10 @@ abstract class AbstractWpEndpoint
 
         $request = new Request('POST', $url, ['Content-Type' => 'application/json'], json_encode($data));
         $response = $this->client->send($request);
+        $results = new ResultSet($request, $response);
 
-        if ($response->hasHeader('Content-Type')
-            && substr($response->getHeader('Content-Type')[0], 0, 16) === 'application/json') {
-            return json_decode($response->getBody()->getContents(), true);
+        if (count($results)) {
+            return $results;
         }
 
         throw new RuntimeException('Unexpected response');
