@@ -75,7 +75,7 @@ describe(AbstractWpEndpoint::class, function () {
             $client = $this->getProphet()->prophesize(WpClient::class);
 
             $request = new Request('GET', '/foo/55');
-            $response = new \GuzzleHttp\Psr7\Response(200, [], '{"foo": "bar"}');
+            $response = new \GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], '{"foo": "bar"}');
 
             $client->send($request)->willReturn($response)->shouldBeCalled();
 
