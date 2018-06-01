@@ -13,6 +13,6 @@ class Media extends AbstractWpEndpoint
      */
     protected function getEndpoint()
     {
-        return '/wp-json/wp/v2/media';
+        return '/media';
     }
 }

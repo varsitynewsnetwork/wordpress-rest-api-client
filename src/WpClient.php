@@ -46,14 +46,21 @@ class WpClient
     private $endPoints = [];
 
     /**
+     * @var bool
+     */
+    private $public;
+
+    /**
      * WpClient constructor.
      * @param ClientInterface $httpClient
      * @param string $wordpressUrl
+     * @param bool $public
      */
-    public function __construct(ClientInterface $httpClient, $wordpressUrl = '')
+    public function __construct(ClientInterface $httpClient, $wordpressUrl = '', $public = FALSE)
     {
         $this->httpClient = $httpClient;
         $this->wordpressUrl = $wordpressUrl;
+        $this->public = $public;
     }
 
     /**
@@ -70,6 +77,22 @@ class WpClient
     public function setCredentials(AuthInterface $auth)
     {
         $this->credentials = $auth;
+    }
+
+    /**
+     * @param bool
+     */
+    public function setPublic($public = TRUE)
+    {
+      $this->public = $public;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublic()
+    {
+        return (bool) $this->public;
     }
 
     /**
@@ -100,10 +123,15 @@ class WpClient
         if ($this->credentials) {
             $request = $this->credentials->addCredentials($request);
         }
-
-        $request = $request->withUri(
-            $this->httpClient->makeUri($this->wordpressUrl . $request->getUri())
-        );
+        if ($this->isPublic()) {
+            $raw_uri = $this->httpClient->makeUri($this->wordpressUrl);
+            $public_uri = 'https://public-api.wordpress.com/wp/v2/sites/' . $raw_uri->getHost();
+            $uri = $this->httpClient->makeUri($public_uri . $request->getUri());
+        }
+        else {
+            $uri = $this->httpClient->makeUri( $this->wordpressUrl . '/wp-json/wp/v2' . $request->getUri());
+        }
+        $request = $request->withUri($uri);
 
         return $this->httpClient->send($request);
     }

@@ -23,7 +23,7 @@ class ResultSet extends ArrayObject
     public $totalPages = 0;
 
     /**
-     * @var Psr\Http\Message\RequestInterface
+     * @var \Psr\Http\Message\RequestInterface
      */
     public $request;
 

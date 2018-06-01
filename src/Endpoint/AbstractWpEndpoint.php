@@ -18,12 +18,18 @@ abstract class AbstractWpEndpoint
     private $client;
 
     /**
+     * @var bool
+     */
+    private $public;
+
+    /**
      * Users constructor.
      * @param WpClient $client
      */
     public function __construct(WpClient $client)
     {
         $this->client = $client;
+        $this->public = $client->isPublic();
     }
 
     abstract protected function getEndpoint();
@@ -40,15 +46,7 @@ abstract class AbstractWpEndpoint
         $uri .= (is_null($id)?'': '/' . $id);
         $uri .= (is_null($params)?'': '?' . http_build_query($params));
 
-        $request = new Request('GET', $uri);
-        $response = $this->client->send($request);
-        $results = new ResultSet($request, $response);
-
-        if (count($results)) {
-            return $results;
-        }
-
-        throw new RuntimeException('Unexpected response');
+        return $this->sendRequest(new Request('GET', $uri));
     }
 
     /**
@@ -64,12 +62,19 @@ abstract class AbstractWpEndpoint
             unset($data['id']);
         }
 
-        $request = new Request('POST', $url, ['Content-Type' => 'application/json'], json_encode($data));
+        return $this->sendRequest(new Request('POST', $url, ['Content-Type' => 'application/json'], json_encode($data)));
+    }
+
+    /**
+     * @param \GuzzleHttp\Psr7\Request $request
+     * @return array
+     */
+    public function sendRequest(Request $request) {
         $response = $this->client->send($request);
         $results = new ResultSet($request, $response);
 
-        if (count($results)) {
-            return $results;
+       if (count($results)) {
+         return $results;
         }
 
         throw new RuntimeException('Unexpected response');
