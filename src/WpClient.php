@@ -22,6 +22,7 @@ use Vnn\WpApiClient\Http\ClientInterface;
  * @method Endpoint\PostTypes postTypes()
  * @method Endpoint\Tags tags()
  * @method Endpoint\Users users()
+ * @method Endpoint\PostRevisions postRevisions()
  */
 class WpClient
 {
