@@ -92,7 +92,7 @@ class WpClient
     public function __call($endpoint, array $args)
     {
         if (!isset($this->endPoints[$endpoint])) {
-            foreach($this->endpointNamespaces as $namespace) {
+            foreach ($this->endpointNamespaces as $namespace) {
                 $class = $namespace . ucfirst($endpoint);
                 if (class_exists($class)) {
                     $this->endPoints[$endpoint] = new $class($this);
