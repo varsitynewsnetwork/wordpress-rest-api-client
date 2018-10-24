@@ -39,7 +39,7 @@ abstract class AbstractWpSubEndpoint extends AbstractWpEndpoint
      */
     protected function buildEndpoint($pattern)
     {
-        if ($this->parentId === NULL) {
+        if ($this->parentId === null) {
             throw new \LogicException(static::class . '::setParent() not called!', 1539454211);
         }
         return sprintf($pattern, $this->parentId);
