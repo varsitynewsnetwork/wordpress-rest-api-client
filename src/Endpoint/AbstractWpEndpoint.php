@@ -74,4 +74,24 @@ abstract class AbstractWpEndpoint
 
         throw new RuntimeException('Unexpected response');
     }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function delete($id = null)
+    {
+        $uri = $this->getEndpoint();
+        $uri .= (is_null($id)?'': '/' . $id);
+
+        $request = new Request('DELETE', $uri);
+        $response = $this->client->send($request);
+
+        if ($response->hasHeader('Content-Type')
+            && substr($response->getHeader('Content-Type')[0], 0, 16) === 'application/json') {
+            return json_decode($response->getBody()->getContents(), true);
+        }
+
+        throw new RuntimeException('Unexpected response');
+    }
 }
