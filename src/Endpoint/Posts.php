@@ -13,6 +13,6 @@ class Posts extends AbstractWpEndpoint
      */
     protected function getEndpoint()
     {
-        return '/wp-json/wp/v2/posts';
+        return '/wp/v2/posts';
     }
 }

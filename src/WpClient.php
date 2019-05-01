@@ -41,6 +41,11 @@ class WpClient
     private $wordpressUrl;
 
     /**
+     * @var string
+     */
+    private $restApiPrefix;
+
+    /**
      * @var array
      */
     private $endPoints = [];
@@ -49,11 +54,13 @@ class WpClient
      * WpClient constructor.
      * @param ClientInterface $httpClient
      * @param string $wordpressUrl
+     * @param string $restApiPrefix
      */
-    public function __construct(ClientInterface $httpClient, $wordpressUrl = '')
+    public function __construct(ClientInterface $httpClient, $wordpressUrl = '', $restApiPrefix = 'wp-json')
     {
         $this->httpClient = $httpClient;
         $this->wordpressUrl = $wordpressUrl;
+        $this->restApiPrefix = $restApiPrefix;
     }
 
     /**
@@ -62,6 +69,14 @@ class WpClient
     public function setWordpressUrl($wordpressUrl)
     {
         $this->wordpressUrl = $wordpressUrl;
+    }
+
+    /**
+     * @param $restApiPrefix
+     */
+    public function setRestApiPrefix($restApiPrefix)
+    {
+        $this->restApiPrefix = $restApiPrefix;
     }
 
     /**
@@ -102,7 +117,7 @@ class WpClient
         }
 
         $request = $request->withUri(
-            $this->httpClient->makeUri($this->wordpressUrl . $request->getUri())
+            $this->httpClient->makeUri($this->wordpressUrl . "/{$this->restApiPrefix}" . $request->getUri())
         );
 
         return $this->httpClient->send($request);
