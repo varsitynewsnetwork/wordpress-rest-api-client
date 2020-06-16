@@ -26,7 +26,7 @@ class Media extends AbstractWpEndpoint
      * @throws \RuntimeException
      * @return array
      */
-    public function upload($filePath, $data = [], $mimeType = null)
+    public function upload(string $filePath, array $data = [], $mimeType = null) : array
     {
         $url = $this->getEndpoint();
 
