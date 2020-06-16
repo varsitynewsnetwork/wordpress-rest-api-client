@@ -42,13 +42,22 @@ class Media extends AbstractWpEndpoint
             if (!$mimeType) {
                 $mimeType = mime_content_type($filePath);
             }
-            $request = new Request('POST', $url, ['Content-Type' => $mimeType, 'Content-Disposition' => 'attachment; filename="'.$fileName.'"'], $fileHandle);
+
+            $request = new Request(
+                'POST',
+                $url,
+                [
+                    'Content-Type' => $mimeType,
+                    'Content-Disposition' => 'attachment; filename="'.$fileName.'"'
+                ],
+                $fileHandle
+            );
             $response = $this->client->send($request);
             fclose($fileHandle);
-            if ($response->hasHeader('Content-Type')
-                && substr($response->getHeader('Content-Type')[0], 0, 16) === 'application/json') {
+            if ($response->hasHeader('Content-Type') &&
+                substr($response->getHeader('Content-Type')[0], 0, 16) === 'application/json') {
                     return json_decode($response->getBody()->getContents(), true);
-                }
+            }
         }
         throw new RuntimeException('Unexpected response');
     }
