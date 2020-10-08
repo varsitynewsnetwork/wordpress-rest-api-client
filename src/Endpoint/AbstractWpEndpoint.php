@@ -33,6 +33,7 @@ abstract class AbstractWpEndpoint
      * @param array $params - parameters that can be passed to GET
      *        e.g. for tags: https://developer.wordpress.org/rest-api/reference/tags/#arguments
      * @return array
+     * @throws \RuntimeException
      */
     public function get($id = null, array $params = null)
     {
@@ -54,6 +55,7 @@ abstract class AbstractWpEndpoint
     /**
      * @param array $data
      * @return array
+     * @throws \RuntimeException
      */
     public function save(array $data)
     {
