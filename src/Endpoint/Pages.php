@@ -13,6 +13,6 @@ class Pages extends AbstractWpEndpoint
      */
     protected function getEndpoint()
     {
-        return '/wp-json/wp/v2/pages';
+        return '/wp/v2/pages';
     }
 }
