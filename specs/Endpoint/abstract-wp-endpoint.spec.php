@@ -74,6 +74,19 @@ describe(AbstractWpEndpoint::class, function () {
         });
     });
 
+    describe('delete()', function () {
+        it('should make a DELETE request to the endpoint URL', function () {
+            $client = $this->getProphet()->prophesize(WpClient::class);
+            $response = new \GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], '{"message": "wordpress user has sucessfully deleted"}');
+            $client->send(\Prophecy\Argument::type(Request::class))->willReturn($response)->shouldBeCalled();
+
+            $endpoint = new FakeEndpoint($client->reveal());
+
+            $data = $endpoint->delete(['ID' => '1']);
+            expect($data)->to->equal(['message' => 'wordpress user has sucessfully deleted']);
+        });
+    });
+
     afterEach(function () {
         $this->getProphet()->checkPredictions();
     });
