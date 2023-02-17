@@ -19,7 +19,13 @@
     "peridot-php/leo": "^1.5",
     "squizlabs/php_codesniffer": "^2.7",
     "guzzlehttp/guzzle": "^6.2",
-    "peridot-php/peridot-prophecy-plugin": "^1.1"
+    "peridot-php/peridot-prophecy-plugin": "^1.1",
+    "phpspec/prophecy": "^1.10.3",
+    "phpspec/prophecy-phpunit": "^1.1.0",
+    "phpunit/phpunit": "^6.5.14",
+    "codeception/assert-throws": "^1.0.3",
+    "codeception/specify": "^1.0",
+    "codeception/verify": "^1.3.0"
   },
   "suggest": {
     "guzzlehttp/guzzle": "^6.2"
