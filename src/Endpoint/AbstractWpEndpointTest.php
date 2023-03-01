@@ -4,7 +4,6 @@ namespace Vnn\WpApiClient\Endpoint;
 
 use Codeception\Specify;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Prophet;
 use Prophecy\Argument;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
@@ -15,7 +14,7 @@ use Vnn\WpApiClient\Endpoint\AbstractWpEndpoint;
  * Class AbstractWpEndpointTest
  * @package Vnn\WpApiClient\Endpoint
  */
-Class AbstractWpEndpointTest extends TestCase
+class AbstractWpEndpointTest extends TestCase
 {
     use Specify;
     public function test()
@@ -69,8 +68,12 @@ Class AbstractWpEndpointTest extends TestCase
                     verify($data)->equals(['foo' => 'bar']);
                 });
 
-                $this->it('should handle unicode data', function() {
-                    $response = new Response(200, ['Content-Type' => 'application/json'], '{"first": "Iván", "last": "Peña"}');
+                $this->it('should handle unicode data', function () {
+                    $response = new Response(
+                        200,
+                        ['Content-Type' => 'application/json'],
+                        '{"first": "Iván", "last": "Peña"}'
+                    );
 
                     $this->wpClient->send(Argument::type(Request::class))->shouldBeCalled()->willReturn($response);
 
@@ -79,11 +82,5 @@ Class AbstractWpEndpointTest extends TestCase
                 });
             });
         });
-    }
-}
-
-class FakeEndpoint extends AbstractWpEndpoint {
-    public function getEndpoint() {
-        return '/foo';
     }
 }

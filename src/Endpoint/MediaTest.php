@@ -37,12 +37,15 @@ class MediaTest extends TestCase
                     verify(strpos($errstr, '404 Not Found'))->notEquals(false);
                 });
 
-                try{
-                    $this->mediaEndpoint->upload($imgUrl, [], $contentType);
-                }catch(RuntimeException $e){
-                    verify($e->getMessage())->equals('Unexpected response');
-                    verify($e)->isInstanceOf(RuntimeException::class);
-                }
+
+                $this->assertThrowsWithMessage(
+                    RuntimeException::class,
+                    'Unexpected response',
+                    [$this->mediaEndpoint, 'upload'],
+                    $imgUrl,
+                    [],
+                    $contentType
+                );
 
                 restore_error_handler();
             });
@@ -52,15 +55,14 @@ class MediaTest extends TestCase
 
                 set_error_handler(function (int $errno, string $errstr, string $errfile) {
                     verify($errno)->equals(E_WARNING);
-                    verify(strpos($errstr, ' No such file or directory'))->equals(false);
+                    verify(strpos($errstr, ' No such file or directory'))->notEquals(false);
                 });
 
-                try{
-                    $this->mediaEndpoint->upload($filename);
-                }catch(RuntimeException $e){
-                    verify($e->getMessage())->equals('Failed asserting that 93 matches expected false.');
-                    verify($e)->isInstanceOf(RuntimeException::class);
-                }
+                $this->assertThrows(
+                    RuntimeException::class,
+                    [$this->mediaEndpoint, 'upload'],
+                    $filename
+                );
 
                 restore_error_handler();
             });
@@ -70,7 +72,9 @@ class MediaTest extends TestCase
             $this->it('should attempt to create a new media item using a POST request', function () {
                 // mocking the response...
                 $streamResponse = $this->prophesize(StreamInterface::class);
-                $streamResponse->getContents()->shouldBeCalled()->willReturn(json_encode(['id' => 32, 'date' => (new \DateTime())->format('c')]));
+                $streamResponse->getContents()->shouldBeCalled()->willReturn(
+                    json_encode(['id' => 32, 'date' => (new \DateTime())->format('c')])
+                );
 
                 $response = $this->prophesize(ResponseInterface::class);
                 $response->hasHeader('Content-Type')->shouldBeCalled()->willReturn(true);
@@ -78,7 +82,7 @@ class MediaTest extends TestCase
                 $response->getBody()->shouldBeCalled()->willReturn($streamResponse->reveal());
 
                 $this->wpClient
-                    ->send(Argument::that(function($arg) {
+                    ->send(Argument::that(function ($arg) {
                         return ($arg instanceof Request) &&
                             $arg->getHeader('Content-Type') == ['text/plain'] &&
                             $arg->getHeader('Content-Disposition') == ['attachment; filename="README.md"'] &&
