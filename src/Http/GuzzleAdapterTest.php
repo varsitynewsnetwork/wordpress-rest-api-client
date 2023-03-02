@@ -8,6 +8,7 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Uri;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\RequestInterface;
 
@@ -18,6 +19,7 @@ use Psr\Http\Message\RequestInterface;
 class GuzzleAdapterTest extends TestCase
 {
     use Specify;
+    use ProphecyTrait;
     public function test()
     {
         $this->describe(GuzzleAdapter::class, function () {

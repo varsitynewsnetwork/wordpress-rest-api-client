@@ -10,7 +10,7 @@ use Vnn\WpApiClient\Endpoint;
 use Vnn\WpApiClient\Http\ClientInterface;
 use Codeception\Specify;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Prophet;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Argument;
 use Vnn\WpApiClient\WpClient;
 use GuzzleHttp\Psr7\Request;
@@ -25,11 +25,12 @@ use Vnn\WpApiClient\Http\GuzzleAdapter;
 class WpClientTest extends TestCase
 {
     use Specify;
+    use ProphecyTrait;
     public function test()
     {
         $this->beforeSpecify(function () {
             $this->client = $this->prophesize(ClientInterface::class);
-            // $this->client = $this->prophesize(GuzzleAdapter::class);
+
             $this->wordpressUrl = 'http://test.com';
 
             $this->wpClient = new WpClient($this->client->reveal(), $this->wordpressUrl);

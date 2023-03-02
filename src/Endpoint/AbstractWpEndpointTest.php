@@ -5,6 +5,7 @@ namespace Vnn\WpApiClient\Endpoint;
 use Codeception\Specify;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Vnn\WpApiClient\WpClient;
@@ -17,6 +18,7 @@ use Vnn\WpApiClient\Endpoint\AbstractWpEndpoint;
 class AbstractWpEndpointTest extends TestCase
 {
     use Specify;
+    use ProphecyTrait;
     public function test()
     {
         $this->beforeSpecify(function () {

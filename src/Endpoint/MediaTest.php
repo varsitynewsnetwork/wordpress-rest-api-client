@@ -6,6 +6,7 @@ use Codeception\Specify;
 use Codeception\AssertThrows;
 use GuzzleHttp\Psr7\Request;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -21,6 +22,7 @@ class MediaTest extends TestCase
 {
     use Specify;
     use AssertThrows;
+    use ProphecyTrait;
     public function test()
     {
         $this->beforeSpecify(function () {
