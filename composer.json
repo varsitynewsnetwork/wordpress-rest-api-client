@@ -1,10 +1,5 @@
 {
   "name": "vnn/wordpress-rest-api-client",
-  "config": {
-    "platform": {
-      "php": "7.4"
-    }
-  },
   "autoload": {
     "psr-4": {
       "Vnn\\WpApiClient\\": "src/"
@@ -20,8 +15,8 @@
     "phpspec/prophecy": "^1.17.0",
     "phpspec/prophecy-phpunit": "^2.0",
     "phpunit/phpunit": "^9.5",
-    "codeception/assert-throws": "^1.1",
-    "codeception/specify": "^1.4.0",
+    "codeception/assert-throws": "^1.0.3",
+    "codeception/specify": "^2.0.0",
     "codeception/verify": "^2.0"
   },
   "suggest": {

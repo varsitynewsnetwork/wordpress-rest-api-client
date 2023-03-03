@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98e59965977ded81bdea8af31015003f",
+    "content-hash": "5448dee53c3410c3fc151f84acb2bb6b",
     "packages": [
         {
             "name": "psr/http-message",
@@ -107,22 +107,22 @@
         },
         {
             "name": "codeception/specify",
-            "version": "1.4.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Specify.git",
-                "reference": "17ae6d4d6cb201ef5461f6587ecfcff8c177f854"
+                "reference": "b718b4b9bb722be4756aa7c9aa7e89b6babc2cf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Specify/zipball/17ae6d4d6cb201ef5461f6587ecfcff8c177f854",
-                "reference": "17ae6d4d6cb201ef5461f6587ecfcff8c177f854",
+                "url": "https://api.github.com/repos/Codeception/Specify/zipball/b718b4b9bb722be4756aa7c9aa7e89b6babc2cf6",
+                "reference": "b718b4b9bb722be4756aa7c9aa7e89b6babc2cf6",
                 "shasum": ""
             },
             "require": {
-                "myclabs/deep-copy": "~1.1",
-                "php": ">=7.1.0",
-                "phpunit/phpunit": ">=7.0 <10.0"
+                "myclabs/deep-copy": "^1.10",
+                "php": ">=7.4.0",
+                "phpunit/phpunit": "^8.0|^9.0"
             },
             "type": "library",
             "autoload": {
@@ -147,9 +147,9 @@
             "description": "BDD code blocks for PHPUnit and Codeception",
             "support": {
                 "issues": "https://github.com/Codeception/Specify/issues",
-                "source": "https://github.com/Codeception/Specify/tree/1.4.0"
+                "source": "https://github.com/Codeception/Specify/tree/2.0.0"
             },
-            "time": "2020-08-27T20:17:29+00:00"
+            "time": "2021-11-22T00:16:11+00:00"
         },
         {
             "name": "codeception/verify",
@@ -2940,8 +2940,5 @@
         "php": "^7.4"
     },
     "platform-dev": [],
-    "platform-overrides": {
-        "php": "7.4"
-    },
     "plugin-api-version": "2.1.0"
 }
