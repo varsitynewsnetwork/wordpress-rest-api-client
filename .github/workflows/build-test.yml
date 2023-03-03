@@ -8,7 +8,6 @@ jobs:
     strategy:
       matrix:
         operating-system: ['ubuntu-latest', 'macos-latest']
-        php-versions: "7.4"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -16,7 +15,7 @@ jobs:
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
+          php-version: "7.4"
 
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
