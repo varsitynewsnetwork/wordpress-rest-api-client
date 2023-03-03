@@ -28,7 +28,7 @@ class GuzzleAdapterTest extends TestCase
                     $adapter = new GuzzleAdapter();
                     $uri = $adapter->makeUri('http://lol.com');
 
-                    verify($uri)->isInstanceOf(UriInterface::class);
+                    verify($uri)->instanceOf(UriInterface::class);
                     verify($uri->getScheme())->equals('http');
                     verify($uri->getHost())->equals('lol.com');
                 });

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b7d824730f365439a1641f4fb92674d",
+    "content-hash": "bff4c6d167f70c043ca919c15d5cfe60",
     "packages": [
         {
             "name": "psr/http-message",
@@ -106,55 +106,6 @@
             "time": "2023-02-10T18:43:02+00:00"
         },
         {
-            "name": "codeception/phpunit-wrapper",
-            "version": "9.0.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Codeception/phpunit-wrapper.git",
-                "reference": "7439a53ae367986e9c22b2ac00f9d7376bb2f8cf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/phpunit-wrapper/zipball/7439a53ae367986e9c22b2ac00f9d7376bb2f8cf",
-                "reference": "7439a53ae367986e9c22b2ac00f9d7376bb2f8cf",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2",
-                "phpunit/phpunit": "^9.0"
-            },
-            "require-dev": {
-                "codeception/specify": "*",
-                "consolidation/robo": "^3.0.0-alpha3",
-                "vlucas/phpdotenv": "^3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Codeception\\PHPUnit\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Davert",
-                    "email": "davert.php@resend.cc"
-                },
-                {
-                    "name": "Naktibalda"
-                }
-            ],
-            "description": "PHPUnit classes used by Codeception",
-            "support": {
-                "issues": "https://github.com/Codeception/phpunit-wrapper/issues",
-                "source": "https://github.com/Codeception/phpunit-wrapper/tree/9.0.9"
-            },
-            "time": "2022-05-23T06:24:11+00:00"
-        },
-        {
             "name": "codeception/specify",
             "version": "1.4.0",
             "source": {
@@ -202,28 +153,27 @@
         },
         {
             "name": "codeception/verify",
-            "version": "1.5.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Verify.git",
-                "reference": "ebf833c857825207a8abec541c07bdd724ea4676"
+                "reference": "2f8f5ce6ea1be5c011f77eb7f1ca0c9f4d551513"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Verify/zipball/ebf833c857825207a8abec541c07bdd724ea4676",
-                "reference": "ebf833c857825207a8abec541c07bdd724ea4676",
+                "url": "https://api.github.com/repos/Codeception/Verify/zipball/2f8f5ce6ea1be5c011f77eb7f1ca0c9f4d551513",
+                "reference": "2f8f5ce6ea1be5c011f77eb7f1ca0c9f4d551513",
                 "shasum": ""
             },
             "require": {
-                "codeception/phpunit-wrapper": "^7.8.0 | ^8.1.2 | ^9.0.2",
                 "ext-dom": "*",
-                "php": ">= 7.1",
-                "phpunit/phpunit": ">= 7.0"
+                "php": "^7.4 || ^8.0",
+                "phpunit/phpunit": "^9.5"
             },
             "type": "library",
             "autoload": {
                 "files": [
-                    "src/Codeception/function.php"
+                    "src/Codeception/bootstrap.php"
                 ],
                 "psr-4": {
                     "Codeception\\": "src\\Codeception"
@@ -246,9 +196,9 @@
             "description": "BDD assertion library for PHPUnit",
             "support": {
                 "issues": "https://github.com/Codeception/Verify/issues",
-                "source": "https://github.com/Codeception/Verify/tree/master"
+                "source": "https://github.com/Codeception/Verify/tree/2.3.0"
             },
-            "time": "2020-08-29T00:28:24+00:00"
+            "time": "2023-02-09T07:21:39+00:00"
         },
         {
             "name": "doctrine/instantiator",

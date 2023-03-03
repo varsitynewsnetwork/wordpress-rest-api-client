@@ -53,7 +53,7 @@ class WpClientTest extends TestCase
 
                     $response = $this->wpClient->send($request);
 
-                    verify($response)->isInstanceOf(Response::class);
+                    verify($response)->instanceOf(Response::class);
                 });
             });
         });
