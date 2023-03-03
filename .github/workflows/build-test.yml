@@ -19,7 +19,7 @@ jobs:
           php-version: ${{ matrix.php-versions }}
 
       - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+        run: composer install --prefer-dist --dev
 
       - name: Execute unit tests via PHPUnit
         run: vendor/bin/phpunit --stop-on-failure
