@@ -85,7 +85,10 @@ class MediaTest extends TestCase
                 $this->wpClient
                     ->send(Argument::that(function ($arg) {
                         return ($arg instanceof Request) &&
-                            $arg->getHeader('Content-Type') == ['text/plain'] &&
+                            (
+                                $arg->getHeader('Content-Type') == ['text/x-ruby'] || //work for php ^8.0
+                                $arg->getHeader('Content-Type') == ['text/plain']
+                            ) &&
                             $arg->getHeader('Content-Disposition') == ['attachment; filename="README.md"'] &&
                             $arg->getMethod() == 'POST'
                         ;
