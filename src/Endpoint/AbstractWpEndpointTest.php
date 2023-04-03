@@ -5,6 +5,7 @@ namespace Vnn\WpApiClient\Endpoint;
 use Codeception\Specify;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Vnn\WpApiClient\WpClient;
@@ -17,6 +18,7 @@ use Vnn\WpApiClient\Endpoint\AbstractWpEndpoint;
 class AbstractWpEndpointTest extends TestCase
 {
     use Specify;
+    use ProphecyTrait;
     public function test()
     {
         $this->beforeSpecify(function () {
@@ -79,6 +81,22 @@ class AbstractWpEndpointTest extends TestCase
 
                     $data = $this->endpoint->save(['first' => 'Iván', 'last' => 'Peña']);
                     verify($data)->equals(['first' => 'Iván', 'last' => 'Peña']);
+                });
+            });
+
+            $this->describe('delete()', function () {
+                $this->it('should make a DELETE request to the endpoint URL', function () {
+                    $response = new Response(
+                        200,
+                        ['Content-Type' => 'application/json'],
+                        '{"message": "wordpress user has sucessfully deleted"}'
+                    );
+                    $this->wpClient->send(Argument::type(Request::class))->shouldBeCalled()->willReturn($response);
+
+                    $endpoint = new FakeEndpoint($this->wpClient->reveal());
+
+                    $data = $endpoint->delete(['ID' => '1']);
+                    verify($data)->equals(['message' => 'wordpress user has sucessfully deleted']);
                 });
             });
         });

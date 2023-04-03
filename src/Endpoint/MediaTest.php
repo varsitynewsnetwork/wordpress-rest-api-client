@@ -6,6 +6,7 @@ use Codeception\Specify;
 use Codeception\AssertThrows;
 use GuzzleHttp\Psr7\Request;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -21,6 +22,7 @@ class MediaTest extends TestCase
 {
     use Specify;
     use AssertThrows;
+    use ProphecyTrait;
     public function test()
     {
         $this->beforeSpecify(function () {
@@ -36,7 +38,6 @@ class MediaTest extends TestCase
                     verify($errno)->equals(E_WARNING);
                     verify(strpos($errstr, '404 Not Found'))->notEquals(false);
                 });
-
 
                 $this->assertThrowsWithMessage(
                     RuntimeException::class,
@@ -84,7 +85,10 @@ class MediaTest extends TestCase
                 $this->wpClient
                     ->send(Argument::that(function ($arg) {
                         return ($arg instanceof Request) &&
-                            $arg->getHeader('Content-Type') == ['text/plain'] &&
+                            (
+                                $arg->getHeader('Content-Type') == ['text/x-ruby'] || //work for php ^8.0
+                                $arg->getHeader('Content-Type') == ['text/plain']
+                            ) &&
                             $arg->getHeader('Content-Disposition') == ['attachment; filename="README.md"'] &&
                             $arg->getMethod() == 'POST'
                         ;

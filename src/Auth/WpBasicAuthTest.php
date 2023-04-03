@@ -23,7 +23,7 @@ class WpBasicAuthTest extends TestCase
 
                     $newRequest = $auth->addCredentials($request);
 
-                    verify($newRequest)->isInstanceOf(Request::class);
+                    verify($newRequest)->instanceOf(Request::class);
                     verify($newRequest->getHeader('Authorization'))->equals([
                         'Basic ' . base64_encode('jim:hunter2')
                     ]);
