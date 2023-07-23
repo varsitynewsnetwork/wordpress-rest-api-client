@@ -35,7 +35,7 @@ abstract class AbstractWpEndpoint
      * @return array
      * @throws \RuntimeException
      */
-    public function get($id = null, array $params = null)
+    public function get($id = null, array $params = null, $lJSONResponse = true)
     {
         $uri = $this->getEndpoint();
         $uri .= (is_null($id)?'': '/' . $id);
@@ -43,6 +43,8 @@ abstract class AbstractWpEndpoint
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
+        
+        if(!$lJSONResponse) return $response;
 
         if ($response->hasHeader('Content-Type')
             && substr($response->getHeader('Content-Type')[0], 0, 16) === 'application/json') {
