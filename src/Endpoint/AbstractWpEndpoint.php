@@ -26,7 +26,7 @@ abstract class AbstractWpEndpoint
         $this->client = $client;
     }
 
-    abstract protected function getEndpoint();
+    abstract protected function getEndpoint($path = '');
 
     /**
      * @param int $id

@@ -6,13 +6,14 @@ namespace Vnn\WpApiClient\Endpoint;
  * Class Comments
  * @package Vnn\WpApiClient\Endpoint
  */
-class Comments extends AbstractWpEndpoint
-{
+class Custom extends AbstractWpEndpoint{
+
     /**
-     * {@inheritdoc}
+     * @param $endpoint - Custom endpoint for REST API route. e.g. /acf/v3/
+     * 
      */
     protected function getEndpoint($path = '')
     {
-        return '/wp-json/wp/v2/comments';
+        return '/wp-json' . $path;
     }
 }
