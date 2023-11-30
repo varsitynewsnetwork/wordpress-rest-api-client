@@ -14,7 +14,7 @@ class Media extends AbstractWpEndpoint
     /**
      * {@inheritdoc}
      */
-    protected function getEndpoint()
+    protected function getEndpoint($path = '')
     {
         return '/wp-json/wp/v2/media';
     }

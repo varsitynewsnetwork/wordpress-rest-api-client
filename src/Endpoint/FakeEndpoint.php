@@ -4,7 +4,7 @@ namespace Vnn\WpApiClient\Endpoint;
 
 class FakeEndpoint extends AbstractWpEndpoint
 {
-    public function getEndpoint()
+    public function getEndpoint($path = '')
     {
         return '/foo';
     }
